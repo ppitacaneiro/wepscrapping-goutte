@@ -1,0 +1,12 @@
+{
+    "name": "pablo/webscrapping-php",
+    "authors": [
+        {
+            "name": "pablo",
+            "email": "ppitacaneiro@gmail.com"
+        }
+    ],
+    "require": {
+        "fabpot/goutte": "^4.0"
+    }
+}
