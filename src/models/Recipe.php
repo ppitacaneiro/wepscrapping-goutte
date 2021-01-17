@@ -1,7 +1,5 @@
 <?php
 
-require './src/core/Model.php';
-
 class Recipe extends Model {
 
     private $id;
@@ -38,7 +36,7 @@ class Recipe extends Model {
             'url_image' => $this->urlImage,
         );
 
-        $idRecipe = $this->insert($data);
+        return $this->insert($data);
     }
     
 }
