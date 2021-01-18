@@ -22,6 +22,7 @@ do {
     $statusCode = $response->getStatusCode();
 
     $crawlerCategory->filter('h3.entry-title')->each(function (Crawler $parentCrawler, $i) use ($client) {
+        
         $recipe = new Recipe();
         $recipe->urlRecipe = $parentCrawler->filter('a')->attr('href');
         
@@ -31,9 +32,14 @@ do {
 
         $category = new Category();
         $category->name = $crawler->filter('span.entry-category')->text();
-        $idCategory = $category->save();
-        $recipe->categoryId = $idCategory;
+        $row = $category->getByField('name',$category->name);
+        if (!empty($row)) {
+            $idCategory = $row[0]->id;
+        } else {
+            $idCategory = $category->save();
+        }
 
+        $recipe->categoryId = $idCategory;
         if ($crawler->filter('div.post-thumb img')->count() > 0) {
             $recipe->urlImage = $crawler->filter('div.post-thumb img')->attr('src');
         }
